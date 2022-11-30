@@ -31,11 +31,15 @@
                   </div>
                 </div>
                   <div v-else class="card mt-3 d-inline-flex justify-content-center shadow-lg p-3 mb-5 bg-white rounded" style="width: 18rem;">
-                      <img :src="pokemonData.sprites.front_default" class="card-img-top" :alt="pokemonData.name">
+                      
+                      <img v-if="!shinyFlag" :src="pokemonData.sprites.front_default" class="card-img-top" :alt="pokemonData.name">
+                      <img v-else :src="pokemonData.sprites.front_shiny" class="card-img-top" :alt="pokemonData.name">
+                      
                       <div class="card-body">
                           <h3 class="text-center">{{ pokemonData.name[0].toUpperCase() + pokemonData.name.slice(1) }}</h3>
                           <p class="card-text text-center">{{spanishDesc}}</p>
                       </div>
+                      <button @click="shiny" class="btn btn-outline-success" type="button">{{textShiny}}</button>
                   </div>
               </div>
           </div>
@@ -56,8 +60,11 @@
         pokemonID: "",
         pokemonPage: {},
         pokemonSpecie: {},
+        pokemonImage: "",
         spanishDesc: "",
+        textShiny:"Ver shiny",
         buscaPokemon:"Busca un pokemon",
+        shinyFlag:false
       }
     },
 
@@ -98,6 +105,19 @@
               break;
             }
           }
+        }
+      },
+      imgPokemon(src) {
+        this.pokemonImage = src;
+      },
+
+      shiny() {
+        if(this.shinyFlag == true) {
+          this.textShiny = "Ver normal";
+          this.shinyFlag = false;
+        } else {
+          this.textShiny = "Ver shiny";
+          this.shinyFlag = true;
         }
       }
     }
