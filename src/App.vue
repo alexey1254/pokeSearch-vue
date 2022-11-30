@@ -25,7 +25,7 @@
                   <div class="card mt-3 d-inline-flex justify-content-center shadow-lg p-3 mb-5 bg-white rounded" style="width: 18rem;">
                       <img src="" class="card-img-top" alt="">
                       <div class="card-body">
-                          <h3 class="text-center">Busca un pokemon</h3>
+                          <h3 class="text-center">{{buscaPokemon}}</h3>
                           <p class="card-text text-center"></p>
                       </div>
                   </div>
@@ -57,6 +57,7 @@
         pokemonPage: {},
         pokemonSpecie: {},
         spanishDesc: "",
+        buscaPokemon:"Busca un pokemon",
       }
     },
 
@@ -72,6 +73,7 @@
 
         } catch (error) {
           console.log("Pokemon no encontrado");
+          this.buscaPokemon="Pokemon no encontrado";
         }
       },
       async pokemonSpecies() {
@@ -95,8 +97,6 @@
               this.spanishDesc = this.pokemonSpecie.flavor_text_entries[key].flavor_text;
               break;
             }
-            
-            
           }
         }
       }
