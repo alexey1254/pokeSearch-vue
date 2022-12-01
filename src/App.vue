@@ -8,9 +8,9 @@
   <body>
       <header>
           <nav class="navbar navbar-dark bg-dark">
-              <div class="container-fluid">
-                  <a class="navbar-brand">Pokedex</a>
-                  <div class="d-flex" role="search">
+              <div class="container-fluid d-flex justify-content-center">
+                  <a class="navbar-brand d-block">Pokedex</a>
+                  <div class="d-flex w-auto" role="search">
                       <input @keyup.enter="click" class="form-control me-2" type="input" placeholder="Id / nombre pokemon" v-model="pokemonID"  aria-label="Buscar">
                       <button @click="click" id="buscar" class="btn btn-outline-success" type="button">Buscar</button>
                   </div>
@@ -93,6 +93,7 @@
         }
       },
       async click() {
+        this.pokemonID = this.pokemonID.toLowerCase();
         await this.pokemonSpecies()
         await this.searchPokemon()
         this.searcDescSpanish()
@@ -112,16 +113,17 @@
       },
 
       shiny() {
-        if(this.shinyFlag == true) {
-          this.textShiny = "Ver normal";
-          this.shinyFlag = false;
-        } else {
+        if(this.shinyFlag) {
           this.textShiny = "Ver shiny";
+          this.shinyFlag = false;
+        } else if(!this.shinyFlag){
+          this.textShiny = "Ver normal";
           this.shinyFlag = true;
         }
       }
     }
   }
+  //Implementar cambiar el idioma de la app
 </script>
 
 <style lang="scss">
